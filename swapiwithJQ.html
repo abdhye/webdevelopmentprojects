@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StarWars API With jquery</title>
+</head>
+
+<style>
+    body {
+        background-image: url(https://wallpaper.dog/large/966393.jpg);
+        background-size: cover;
+    }
+
+    .chacImg {
+        height: 550px;
+        width: auto;
+        display: block;
+        margin: auto;
+    }
+
+    .chacName {
+        text-align: center;
+        color: blanchedalmond;
+    }
+
+    button {
+        display: block;
+        margin: auto;
+        border: 1px solid cornsilk;
+        border-radius: 8px;
+        background-color: rgba(0, 0, 0, 0);
+        color: white;
+        height: 28px;
+    }
+
+    strong {
+        font-size: 15px;
+    }
+</style>
+
+<body>
+
+    <img src="" alt="img" class="chacImg">
+    <h2 class="chacName"></h2>
+    <button>
+        <strong>Random Star Wars Character Generator</strong>
+    </button>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("button").on("click", function () {
+                const randNum = Math.ceil(Math.random() * 88)
+                $.get(`https://rawcdn.githack.com/akabab/starwars-api/0.2.1/api/id/${randNum}.json`,
+                    function (data) {
+                        $("h2.chacName").text(data['name'])
+                        $(".chacImg").attr("src", data['image'])
+                    })
+            })
+        });
+
+    </script>
+</body>
+
+</html>

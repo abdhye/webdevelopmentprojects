@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StarWarsAPI</title>
+</head>
+
+<style>
+    body {
+
+        background-image: url(https://wallup.net/wp-content/uploads/2015/12/52824-Star_Wars-space.jpg);
+        background-size: cover;
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+    .box {
+        height: 220px;
+        width: 400px;
+        border: 2px solid black;
+        border-radius: 10px;
+        padding: 5px;
+        background-color: bisque;
+        opacity: 0.87;
+        color: black;
+    }
+
+    button {
+        height: 32px;
+        background-color: indianred;
+        color: white;
+        border: 1px solid indianred;
+        border-radius: 8px;
+    }
+
+    table {
+        margin-left: 22%;
+    }
+
+    .btns {
+        text-align: center;
+    }
+</style>
+
+<body>
+
+    <h1 style="color: palevioletred;">Star Wars API</h1>
+    <table>
+        <tr>
+            <td>
+                <div class="box">
+                    <h1 id="personName"></h1>
+                    <h3 id="personHeight"></h3>
+                    <h3 id="personHaircolor"></h3>
+                    <h3 id="personDob"></h3>
+                </div>
+            </td>
+            <td>
+                <div class="box">
+                    <h1 id="planetName"></h1>
+                    <h3 id="planetCli"></h3>
+                    <h3 id="planetPop"></h3>
+                    <h3 id="planetTer"></h3>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="btns"> <button id="randomPer">Click For a Random Person</button> </td>
+            <td class="btns"> <button id="randomPla">Click For a Random Planet</button> </td>
+        </tr>
+    </table>
+
+    <script>
+        let person = document.querySelector('#randomPer')
+        let planet = document.querySelector('#randomPla')
+
+        let personName = document.querySelector('#personName')
+        let personHeight = document.querySelector('#personHeight')
+        let personHaircolor = document.querySelector('#personHaircolor')
+        let personDob = document.querySelector('#personDob')
+
+        let planetName = document.querySelector('#planetName')
+        let planetCli = document.querySelector('#planetCli')
+        let planetPop = document.querySelector('#planetPop')
+        let planetTer = document.querySelector('#planetTer')
+
+
+
+
+        function getPerson() {
+            let randomNumber = Math.ceil(Math.random() * 15)
+            let peopleapi = 'https://swapi.dev/api/people/' + randomNumber
+            fetch(peopleapi)
+                .then(response => response.json())
+                .then(data => {
+                    personName.innerText = data.name
+                    personHeight.innerText = `Height: ${data.height}`
+                    personHaircolor.innerText = `Hair Color: ${data.hair_color}`
+                    personDob.innerText = `Birth Year: ${data.birth_year}`
+
+                })
+        }
+
+        person.addEventListener('click', getPerson)
+
+        function getPlanet() {
+            let randomNumber = Math.ceil(Math.random() * 15)
+            let planetapi = 'https://swapi.dev/api/planets/' + randomNumber
+            fetch(planetapi)
+                .then(response => response.json())
+                .then(data => {
+                    planetName.innerText = data.name
+                    planetCli.innerText = `Climate: ${data.climate}`
+                    planetPop.innerText = `Population: ${data.population}`
+                    planetTer.innerText = `Terrain: ${data.terrain}`
+                })
+        }
+        planet.addEventListener('click', getPlanet)
+
+    </script>
+
+</body>
+
+</html>
